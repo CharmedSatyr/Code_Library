@@ -1,0 +1,93 @@
+function checkCashRegister(price, cash, cid) {
+
+  //price = purchase price
+  //cash = payment
+  //cid = cash in drawer
+  var change = [
+    ["PENNY", 0.00],
+    ["NICKEL", 0.00],
+    ["DIME", 0.00],
+    ["QUARTER", 0.00],
+    ["ONE", 0.00],
+    ["FIVE", 0.00],
+    ["TEN", 0.00],
+    ["TWENTY", 0.00],
+    ["ONE HUNDRED", 0.00]
+  ];
+
+  //Determine cidVal, rounding to two decimal points to remove calculation errors
+  var cidVal = 0;
+
+  for (var i = 0; i < cid.length; i++) {
+    cidVal = Math.round((cidVal += cid[i][1]) * 100) / 100;
+  }
+
+  
+  return cidVal;
+}
+
+/*
+
+
+  //determine changeVal
+  var changeVal = cash - price;
+
+  //Handle 'Closed' cases and simple 'Insufficient funds' cases
+  if (cidVal < changeVal) {
+    change = 'Insufficient funds';
+  } else if (cidVal === changeVal) {
+    change = 'Closed';
+  }
+  
+  //Then, use a for loop to start at cid's highest entry and go down to lower denominations. Probably (var i = cid.length-1; i <= 0; i--)
+  //While the value of cid[i][1] is >= changeVal, add a bill of that denomination to var change, and subtract that amount from both changeVal and cid[i][1].
+  //This might involve a global object... I need to be able to add a key and value to var change and then stack the values of additions with the same key without duplicating keys
+  //Then we'll need to check for insufficient funds that come about via incorrect denomination matchup... if i gets to the bottom and we still haven't made change, we can mark 'Insufficient funds' then, too.
+for (var j = cid.length; j <= 0; j--) {
+ while (cid[3][1] >= changeVal) {
+      if (cid[3][0] == "QUARTER") {
+        change[3][1] += 0.25; cid[3][1] -= 0.25; changeVal -= 0.25;
+      }
+}
+
+      switch (true) {
+          case(cid[i][0] == "ONE HUNDRED"): change[i][1] += 100; cid[i][1] -= 100; changeVal -= 100;
+          break;
+          case(cid[i][0] == "TWENTY"): change[i][1] += 20; cid[i][1] -= 20; changeVal -= 20;
+          break;
+          case(cid[i][0] == "TEN"): change[i][1] += 10; cid[i][1] -= 10; changeVal -= 10;
+          break;
+          case(cid[i][0] == "FIVE"): change[i][1] += 5; cid[i][1] -= 5; changeVal -= 5;
+          break;
+          case(cid[i][0] == "ONE"): change[i][1] += 1; cid[i][1] -= 1; changeVal -= 1;
+          break;
+          case(cid[i][0] == "QUARTER"): change[i][1] += 0.25; cid[i][1] -= 0.25; changeVal -= 0.25;
+          break;
+          case(cid[i][0] == "DIME"): change[i][1] += 0.1; cid[i][1] -= 0.1; changeVal -= 0.1;
+          break;
+          case(cid[i][0] == "NICKEL"): change[i][1] += 0.05; cid[i][1] -= 0.05; changeVal -= 0.05;
+          break;
+          case(cid[i][0] == "PENNY"): change[i][1] += 0.01; cid[i][1] -= 0.01; changeVal -= 0.01;
+          break;
+      }
+      
+  
+
+  }
+
+  
+  
+  return change;
+}
+*/
+checkCashRegister(19.50, 20.00, [
+  ["PENNY", 1.01],
+  ["NICKEL", 0.05],
+  ["DIME", 0.00],
+  ["QUARTER", 0.00],
+  ["ONE", 0.00],
+  ["FIVE", 0.00],
+  ["TEN", 0.00],
+  ["TWENTY", 0.00],
+  ["ONE HUNDRED", 0.00]
+]);
