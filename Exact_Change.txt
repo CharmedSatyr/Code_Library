@@ -3,7 +3,29 @@ function checkCashRegister(price, cash, cid) {
   //price = purchase price
   //cash = payment
   //cid = cash in drawer
-  var change = [
+  var change;
+
+  //Determines the value of the cash in drawer, rounded to two decimal points to remove calculation errors
+  var cidVal = 0;
+
+  for (var i = 0; i < cid.length; i++) {
+    cidVal = Math.round((cidVal += cid[i][1]) * 100) / 100;
+  }
+
+  //Determine the value of the change owed
+  var changeVal = cash - price;
+
+  //Handle 'Closed' cases and simple 'Insufficient funds' cases
+  if (cidVal < changeVal) {
+    change = 'Insufficient funds';
+    return change;
+  } else if (cidVal === changeVal) {
+    change = 'Closed';
+    return change;
+  }  
+
+    //Why did I set it up like this? Why not just throw stuff into a change array as it is relevant?
+  change = [
     ["PENNY", 0.00],
     ["NICKEL", 0.00],
     ["DIME", 0.00],
@@ -15,29 +37,13 @@ function checkCashRegister(price, cash, cid) {
     ["ONE HUNDRED", 0.00]
   ];
 
-  //Determine cidVal, rounding to two decimal points to remove calculation errors
-  var cidVal = 0;
-
-  for (var i = 0; i < cid.length; i++) {
-    cidVal = Math.round((cidVal += cid[i][1]) * 100) / 100;
-  }
-
+  //While loop?
   
-  return cidVal;
+  return change;
 }
 
 /*
 
-
-  //determine changeVal
-  var changeVal = cash - price;
-
-  //Handle 'Closed' cases and simple 'Insufficient funds' cases
-  if (cidVal < changeVal) {
-    change = 'Insufficient funds';
-  } else if (cidVal === changeVal) {
-    change = 'Closed';
-  }
   
   //Then, use a for loop to start at cid's highest entry and go down to lower denominations. Probably (var i = cid.length-1; i <= 0; i--)
   //While the value of cid[i][1] is >= changeVal, add a bill of that denomination to var change, and subtract that amount from both changeVal and cid[i][1].
