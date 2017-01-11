@@ -4,25 +4,23 @@ Inventory Update
 Compare and update the inventory stored in a 2D array against a second 2D array of a fresh delivery. Update the current existing inventory item quantities (in arr1). If an item cannot be found, add the new item and quantity into the inventory array. The returned inventory array should be in alphabetical order by item.
 */
 
+
 function updateInventory(arr1, arr2) {
-    // All inventory must be accounted for or you're fired!
-    return arr1;
+
+//Return the item names for current and new inventories
+var curItems = arr1.map(function(curr) {return curr[1];});
+var newItems = arr2.map(function(curr) {return curr[1];});
+
+//Filter the newItems list for duplicates with curItems, then concatenate the two lists and sort alphabetically
+var allItems = curItems.concat(newItems.filter(function(item){return curItems.indexOf(item) < 0;})).sort();
+  
+//Go through the original arrays and sum up numbers associated with the allItems list
+
+  
+  
+return allItems;
+  
+
 }
-
-// Example inventory lists
-var curInv = [
-    [21, "Bowling Ball"],
-    [2, "Dirty Sock"],
-    [1, "Hair Pin"],
-    [5, "Microphone"]
-];
-
-var newInv = [
-    [2, "Hair Pin"],
-    [3, "Half-Eaten Apple"],
-    [67, "Bowling Ball"],
-    [7, "Toothpaste"]
-];
-
-updateInventory(curInv, newInv);
-
+  
+updateInventory([], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]]);
