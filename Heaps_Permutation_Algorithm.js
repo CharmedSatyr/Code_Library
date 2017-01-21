@@ -1,6 +1,3 @@
-//Use Heap's Algorithm to log every permutation of the items in an array
-
-//Sample array
 var arr = ['a', 'b', 'c'];
 
 //This function swaps the positions of items in an array
@@ -21,22 +18,8 @@ function perm(n, arr) {
   for (var i = 0; i < n; i++) {
     perm(n - 1, arr);
 
-    if (n % 2 === 0) {
-      swap(arr, i, n - 1);
-    } else {
-      swap(arr, 0, n - 1);
-    } //end if
-  } //end for
+    if (n % 2 === 0 ? swap(arr, i, n - 1) : swap(arr, 0, n - 1));
+  }
 }
 
 perm(arr.length, arr);
-
-/*
-Sample output
-["a", "b", "c"]
-["b", "a", "c"]
-["c", "a", "b"]
-["a", "c", "b"]
-["b", "c", "a"]
-["c", "b", "a"]
-*/
