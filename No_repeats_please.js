@@ -1,10 +1,3 @@
-/*
-No repeats please
-Return the number of total permutations of the provided string that don't have repeated consecutive letters. Assume that all characters in the provided string are each unique.
-
-For example, aab should return 2 because it has 6 total permutations (aab, aab, aba, aba, baa, baa), but only 2 of them (aba and aba) don't have the same letter (in this case a) repeating.
-*/
-
 function permAlone(str) {
 
   //Length of the string
@@ -54,10 +47,41 @@ function permAlone(str) {
     }
   };
 
+  var regex = /([a-z])\1+/gm;
+
   //The total number of permutations in these problems will always be n!/(n-r)!, where r=n because order matters but we never have any "extra" unused letters
   var totalPerms = factorial(len);
+
+  function perm(n, arr) {
+    if (n = 1) {
+      return arr;
+    } else {
+
+      for (var i = 0; i < (n - 1); i += 1) {
+
+        var temp = [];
+        var b = arr[n - 1];
+
+        if (n % 2 === 0) {
+          var a = arr[i];
+
+          a = temp;
+          b = a;
+          temp = b;
+
+        } else {
+          var o = arr[0];
+
+          o = temp;
+          b = o;
+          temp = b;
+        }
+      }
+      perm(n - 1, arr);
+    }
+  }
 
   return totalPerms;
 }
 
-permAlone("aabb");
+permAlone("aaabb");
