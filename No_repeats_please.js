@@ -1,13 +1,10 @@
 function permAlone(str) {
 
-  //Length of the string
-  var len = str.length;
-
   //Split the string into an array
   var arr = str.split('');
 
-  //This regex identifies two identical letters in a row
-  var regex = /([a-z])\1+/gm;
+  //Counter for No repeats perms
+  var counter = 0;
 
   //This function swaps the positions of items in an array
   function swap(swapArr, pos1, pos2) {
@@ -16,11 +13,19 @@ function permAlone(str) {
     swapArr[pos2] = tmp;
     return swapArr;
   }
-
-  //This is a recursive JS version of Heap's algorithm
+  
+  //This is a recursive version of Heap's algorithm
+  //and takes arr's length and arr as params
   function perm(n, arr) {
-    if (n === 1) {
-      console.log(arr);
+
+    //Regex identifies two identical letters in a row. For some reason it must be
+    //inside the perm function
+    var regex = /([a-z])\1+/gm;
+
+    if (n === 1 && !regex.test(arr.join(''))) {
+      counter++;
+      //Erase the regex test and uncommenting the below to log all perms
+      //console.log(arr);
       return;
     }
 
@@ -31,7 +36,11 @@ function permAlone(str) {
       
     } //end for
   }
-  perm(len, arr);
+  
+  perm(arr.length, arr);
+
+  return counter;
+
 }
 
-permAlone("acd");
+permAlone("ad");
