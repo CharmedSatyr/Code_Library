@@ -20,8 +20,10 @@ Remember to use Read-Search-Ask if you get stuck. Try to pair program. Write you
 
 Here are some helpful links:
 
-String.prototype.split() (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+String.prototype.split() (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+
 String.prototype.substr() (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr)
+
 parseInt() (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt)
 */
 
@@ -140,8 +142,9 @@ function makeFriendlyDates(arr) {
     }
   });
 
-  var final = [];
   //Don't print the same date twice.
+  var final = [];
+
   if (arr[0] !== arr[1]) {
     final.push(pretty(a), pretty(b));
   } else {
