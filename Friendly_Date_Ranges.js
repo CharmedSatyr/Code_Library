@@ -63,7 +63,7 @@ function makeFriendlyDates(arr) {
   swap(numArr, 3, 4);  
 
   //Create placeholder for duplicate months
-  if (numArr[0] == numArr[3]) {
+  if (numArr[0] == numArr[3] && numArr[2] === numArr[5]) {
     numArr.splice(3, 1, 0);
   }
 
@@ -112,4 +112,4 @@ function makeFriendlyDates(arr) {
   return final;
 }
 
-makeFriendlyDates(["2018-01-13", "2018-01-13"]);
+makeFriendlyDates(["2022-09-05", "2023-09-04"]);
