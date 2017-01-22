@@ -60,34 +60,34 @@ function makeFriendlyDates(arr) {
   swap(numArr, 0, 2);
   swap(numArr, 0, 1);
   swap(numArr, 5, 3);
-  swap(numArr, 3, 4);
+  swap(numArr, 3, 4);  
 
   //Create placeholder for duplicate months
   if (numArr[0] == numArr[3]) {
     numArr.splice(3, 1, 0);
   }
-  
+
   //Create placeholder for dates within a year of each other
-  if (numArr[5] - numArr[2] <= 1 && numArr[2] !== 2017) {
+  if (numArr[5] - numArr[2] <= 1 && numArr[2] !== 2017 && arr[0] !== arr[1]) {
     numArr.splice(2, 1, 0);
     numArr.splice(5, 1, 0);
   } else if (numArr[5] - numArr[2] <=1) {
     numArr.splice(5, 1, 0);
   }  
-  
   //Separate the first and second dates into their own arrays
   var a = [numArr[0], numArr[1], numArr[2]];
   var b = [numArr[3], numArr[4], numArr[5]];
+  
+    
+  //Clean out total duplicate dates
+  if (b[1] === a[1] && b[0] === 0 && b[2] === 0) {
+    b[1] = 'ugly';
+  }
   
   //Clean out placeholders
   a = a.filter(function(curr) {if (curr !== 0) {return curr;}});
   b = b.filter(function(curr) {if (curr !== 0) {return curr;}});
 
-/*  //Clean out total repeats
-  if (b.length === 1 && b == a[1]) {
-    b = 0;
-  }
-  */
   //Join together in pretty format
   function pretty(arr) {
     var result;
@@ -103,7 +103,13 @@ function makeFriendlyDates(arr) {
   a = pretty(a);
   b = pretty(b);
 
-  return [a,b];
+  var final = [];
+  final.push(a);
+  if (b !== "ugly") {
+    final.push(b);
+  }
+  
+  return final;
 }
 
 makeFriendlyDates(["2018-01-13", "2018-01-13"]);
