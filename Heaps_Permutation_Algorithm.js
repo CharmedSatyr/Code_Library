@@ -18,7 +18,7 @@ function perm(n, arr) {
   for (var i = 0; i < n; i++) {
     perm(n - 1, arr);
 
-    if (n % 2 === 0 ? swap(arr, i, n - 1) : swap(arr, 0, n - 1));
+    n % 2 === 0 ? swap(arr, i, n - 1) : swap(arr, 0, n - 1);
   }
 }
 
