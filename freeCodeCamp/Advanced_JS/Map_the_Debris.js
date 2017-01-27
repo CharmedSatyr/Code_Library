@@ -1,26 +1,46 @@
+/*
+
+Map the Debris
+
+Return a new array that transforms the element's average altitude into their orbital periods.
+
+The array will contain objects in the format {name: 'name', avgAlt: avgAlt}.
+
+You can read about orbital periods on wikipedia (http://en.wikipedia.org/wiki/Orbital_period).
+
+The values should be rounded to the nearest whole number. The body being orbited is Earth.
+
+The radius of the earth is 6367.4447 kilometers, and the GM value of earth is 398600.4418 km3s-2.
+
+Remember to use Read-Search-Ask (https://github.com/FreeCodeCamp/freecodecamp/wiki/FreeCodeCamp-Get-Help)if you get stuck. Try to pair program. Write your own code.
+
+Here are some helpful links:
+
+Math.pow() (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow)
+
+
+*/
 function orbitalPeriod(arr) {
+
+//Formula:   T = 2 pi * sqrt(r^3 / GM )
   
-  var earthRadius = 6367.4447;
+  var T, //s; orbital period
+      r; //km; orbit's semi-major axis - earth's radius plus altitude
+      
+      var earthRadius = 6367.4447; //km 
+      var GM = 398600.4418; //km^3/s^2; G = gravitational constant; M = mass of Earth
   
-  var T; //Orbital period in seconds
-  var r = earthRadius + arr[0].avgAlt;// = orbit's semi-major axis in meters
-  //G = gravitational constant
-  //M = mass of the more massive body
-  var GM = 398600.4418; //GM in km^3/2^2
-  var m = GM;//Convert to meters - the standard gravitational parameter in m^3/s^2
-  var pi = Math.PI;
-    
-  T = Math.round(2 * pi * Math.sqrt(Math.pow(r, 3) / m));
-  
-  //T is the orbital period. Now to replace the 
-//  var solution = arr.map(function (curr) {arr[0].avgAlt};);
-  
-  arr[0].avgAlt = arr[0].orbitalPeriod;
-  arr[0].orbitalPeriod = T;
-  delete arr[0].avgAlt;
+  //Now to replace the avgAlt keys and values with orbitalPeriod ones
+  arr.map(function (curr) {
+    r = earthRadius + curr.avgAlt;
+    T = Math.round(2 * Math.PI * Math.sqrt(Math.pow(r, 3) / GM));
+    curr.avgAlt = curr.orbitalPeriod;
+    curr.orbitalPeriod = T;
+    delete curr.avgAlt;
+  });
   
   return arr;
 }
 
-orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
+orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]);
 
