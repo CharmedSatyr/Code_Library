@@ -31,7 +31,6 @@ return arr.reduce(function(acc, curr, index, array) {
         acc += index + i;
         array.splice(index, 1, NaN);
         array.splice(i, 1, NaN);
-	break;
       }
     }
     return acc;
