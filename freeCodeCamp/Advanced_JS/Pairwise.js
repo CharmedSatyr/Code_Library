@@ -27,11 +27,10 @@ Array.prototype.reduce() (https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 function pairwise(arr, arg) {
 return arr.reduce(function(acc, curr, index, array) {
     for (var i = 0; i < array.length; i++) {
-      if (array[index] + array[i] === arg && index !== i) { //I'm not sure why array[index] !== curr
+      if (array[index] + array[i] === arg && index !== i) { //array[index] used instead of curr because curr would hold its value instead of being replaced in the splices. array[index] checks the value each time it's called and 'notices' the splices. If using curr in place of array[index], would need a "break;" after the splices to stop the for loop each time. 
         acc += index + i;
         array.splice(index, 1, NaN);
         array.splice(i, 1, NaN);
-	break;
       }
     }
     return acc;
