@@ -25,28 +25,17 @@ Array.prototype.reduce() (https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 */
 
 function pairwise(arr, arg) {
-  
-  var sum = 0;
-  var array = arr;
-  
-array.reduce(function (acc, curr, index) {
-  for (var i = 0; i < array.length; i++) {
-    if (curr + array[i] === arg && index !== i) {
-      sum += index + i;
-      
-      //These two work for tests 1, 2, 5
-      array.splice(index, 1, NaN);
-      array.splice(i, 1, NaN);
-
-      //These two work for tests 2, 3, 4, 5
-      //array.splice(index, 1);
-      //array.splice(i, 1);
-
+return arr.reduce(function(acc, curr, index, array) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[index] + array[i] === arg && index !== i) { //I'm not sure why array[index] !== curr
+        acc += index + i;
+        array.splice(index, 1, NaN);
+        array.splice(i, 1, NaN);
+      }
     }
-  }
-}, 0); 
-  
-  return sum;
+    return acc;
+  }, 0);
+
 }
 
-pairwise([1, 1, 1], 2);
+pairwise([1, 1, 1], 2); //should return 1.
