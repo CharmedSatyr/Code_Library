@@ -17,10 +17,13 @@ RegExp (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global
 */
 
 function permAlone(str) {
-
+  
   //Split the string into an array
   var arr = str.split('');
 
+  //Matches strings with two repeating letters
+  var regex = /([a-z])\1+/gm;
+  
   //Counter for No repeats perms
   var counter = 0;
 
@@ -32,27 +35,19 @@ function permAlone(str) {
     return swapArr;
   }
   
-  //This is a recursive version of Heap's algorithm
-  //and takes arr's length and arr as params
+  //This is a recursive version of Heap's algorithm; takes arr's length and arr as params
   function perm(n, arr) {
 
-    //Regex identifies two identical letters in a row. For some reason it must be
-    //inside the perm function
-    var regex = /([a-z])\1+/gm;
-
-    if (n === 1 && !regex.test(arr.join(''))) {
+    if (n === 1 && !arr.join('').match(regex)) {
       counter++;
-      //Erase the regex test and uncommenting the below to log all perms
-      //console.log(arr);
-      return;
+      //Logs all passing perms passing regex test. Remove regex condition to log all perms.
+      //console.log(arr); 
     }
 
     for (var i = 0; i < n; i++) {
       perm(n - 1, arr);
-
       if (n % 2 === 0 ? swap(arr, i, n - 1) : swap(arr, 0, n - 1));
-      
-    } //end for
+    }
   }
   
   perm(arr.length, arr);
@@ -61,4 +56,4 @@ function permAlone(str) {
 
 }
 
-permAlone("ad");
+permAlone("addhs");
